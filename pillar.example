@@ -1,0 +1,7 @@
+pacman:
+  repos:
+    - antergos:
+      - url: https://antergos.com/i/think
+    - core
+    - community
+    - extra
