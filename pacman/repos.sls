@@ -27,5 +27,5 @@ unattended_upgrades:
   pkg.latest:
   {% else %}
   test.nop:
-    - names: {{ to_upgrade }}
   {% endif %}
+    - names: {{ to_upgrade }}
