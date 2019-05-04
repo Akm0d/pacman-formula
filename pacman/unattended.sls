@@ -1,9 +1,8 @@
-{% set pillar = salt['pillar.get']('pacman') %}
-
-{% if grains.os_family == 'Arch' %}
-pacman:
-  # List packages by repo
-  # If a repo is in the pillar's list of repos, then see if packages in that repo have upgrades
-  # upgrade packages
-
-{% endif %} 
+{%- from 'pacman/map.jinja' import to_upgrade with context %}
+unattended_upgrades:
+  {% if to_upgrade %}
+  pkg.latest:
+  {% else %}
+  test.nop:
+  {% endif %}
+    - names: {{ to_upgrade }}
