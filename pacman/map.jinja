@@ -1,5 +1,6 @@
 {% set pillar = salt['pillar.get']('pacman') %}
 {% set unattended_repos = [] %}
+{% set to_upgrade = [] %}
 {% set repos = pillar.get('repos', {}) %}
 {% set options = pillar.get('options', {}) %}
 
