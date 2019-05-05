@@ -1,4 +1,4 @@
-{%- set pacman = salt['pillar.get']('pacman', {}) -%}
+{%- from 'pacman/map.jinja' import options, repos with context %}
 #
 # /etc/pacman.conf
 #
@@ -8,7 +8,7 @@
 # GENERAL OPTIONS
 #
 [options]
-{% for option in pacman.options -%}
+{% for option in options -%}
 {%- if option is string -%}
 {{option}}
 {% else %}
@@ -45,14 +45,12 @@ RemoteFileSigLevel = Required
 # The header [repo-name] is crucial - it must be present and
 # uncommented to enable the repo.
 #
-{% for repo in pacman.repos %}
+{% for repo in repos %}
 [{{ repo.keys()[0] }}]
 {%- set repo_opts = repo.values()[0] -%}
 {%- for option in repo_opts -%}
 {%- for key, value in option.items() %}
-{%- if "unattended_upgrade" not in key %}
 {{ key }} = {{ value }}
-{%- endif -%}
 {%- endfor -%}
 {% endfor %}
 {% endfor %}

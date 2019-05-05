@@ -1,13 +1,16 @@
 {% set pillar = salt['pillar.get']('pacman') %}
 {% set unattended_repos = [] %}
 {% set to_upgrade = [] %}
+{% set repos = pillar.get('repos', {}) %}
+{% set options = pillar.get('options', {}) %}
 
 {% if grains.os_family == 'Arch' %}
-  {% for repo in pillar.get('repos', {}) %}
-    {% if repo is not string %}
-      {% set repo = repo.keys()[0] %}
-    {% endif %}
-    {% do unattended_repos.append(repo) %}
+  {% for repo in repos %}
+    {% for option in repo.values()[0] %}
+        {% if option.pop("unattended_upgrade", False) %}
+            {% do unattended_repos.append(repo.keys()[0]) %}
+        {% endif %}
+    {% endfor %}
   {% endfor %}
 
   {% set refresh_db = salt['pkg.refresh_db']() %}
