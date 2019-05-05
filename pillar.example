@@ -1,7 +1,51 @@
 pacman:
   repos:
+#   - antergos-staging:
     - antergos:
-      - url: https://antergos.com/i/think
-    - core
-    - community
-    - extra
+      - Include: /etc/pacman.d/antergos-mirrorlist
+      - SigLevel: PackageRequired
+      - Server: http://mirrors.antergos.com/$repo/$arch/
+      - unattended_upgrade: True
+    - community:
+      - unattended_upgrade: True
+#   - community-testing: 
+    - core:
+      - unattended_upgrade: True
+    - extra:
+      - unattended_upgrade: False
+    - multilib:
+      - unattended_upgrade: False
+#   - multilib-testing:
+#   - testing:
+  options:
+    - RootDir: /
+    - DBPath: /var/lib/pacman/
+    - CacheDir: /var/cache/pacman/pkg/
+    - LogFile: /var/log/pacman.log
+    - GPGDir: /etc/pacman.d/gnupg/
+    - HookDir: /etc/pacman.d/hooks/
+    - HoldPkg: pacman glibc
+    - XferCommand: /usr/bin/curl -L -C - -f -o %o %u
+    - XferCommand: /usr/bin/wget --passive-ftp -c -O %o %u
+    - CleanMethod: KeepInstalled
+    - UseDelta: 0.7
+    - Architecture: auto
+#   - IgnorePkg:
+#     - package1
+#     - package2
+#   - IgnoreGroup:
+#     - group1
+#     - group2
+#   - NoUpgrade:
+#     - package1
+#     - package2
+#   - NoExtract:
+#     - package1
+#     - package2
+#   - UseSyslog
+#   - Color
+#   - TotalDownload
+    - CheckSpace
+#   - VerbosePkgLists
+    - SigLevel: Required DatabaseOptional
+#   - RemoteFileSigLevel: Required
