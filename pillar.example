@@ -5,20 +5,20 @@ pacman:
 #     - Include: /etc/pacman.d/antergos-mirrorlist
 #     - SigLevel: PackageRequired
 #     - Server: http://mirrors.antergos.com/$repo/$arch/
-#     - unattended_upgrade: TrueFalse
+#     - unattended_upgrade: False
     - community:
-      - unattended_upgrade: True
+      - unattended_upgrade: False
       - Include: /etc/pacman.d/mirrorlist
 #   - community-testing: 
     - core:
       - Include: /etc/pacman.d/mirrorlist
-      - unattended_upgrade: True
+      - unattended_upgrade: False
     - extra:
       - Include: /etc/pacman.d/mirrorlist
-      - unattended_upgrade: True
+      - unattended_upgrade: False
     - multilib:
       - Include: /etc/pacman.d/mirrorlist
-      - unattended_upgrade: True
+      - unattended_upgrade: False
 #   - multilib-testing:
 #   - testing:
   options:
