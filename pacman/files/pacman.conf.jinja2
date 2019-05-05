@@ -13,7 +13,11 @@
 {{option}}
 {% else %}
 {%- for key, value in option.items() -%}
+{%- if value|is_list -%}
+{{ key }} = {{ value|join(', ') }}
+{%- else -%}
 {{ key }} = {{ value }}
+{%- endif %}
 {% endfor -%}
 {% endif %}
 {%- endfor %}
