@@ -1,4 +1,5 @@
-#{%- set pacman = salt['pillar.get']('pacman', {}) -%}
+{%- set pacman = salt['pillar.get']('pacman', {}) -%}
+#
 # /etc/pacman.conf
 #
 # See the pacman.conf(5) manpage for option and repository directives
@@ -8,7 +9,7 @@
 #
 [options]
 {% for option in pacman.options -%}
-{% if option is string %}
+{%- if option is string -%}
 {{option}}
 {% else %}
 {%- for key, value in option.items() -%}
@@ -44,3 +45,14 @@ RemoteFileSigLevel = Required
 # The header [repo-name] is crucial - it must be present and
 # uncommented to enable the repo.
 #
+{% for repo in pacman.repos %}
+[{{ repo.keys()[0] }}]
+{%- set repo_opts = repo.values()[0] -%}
+{%- for option in repo_opts -%}
+{%- for key, value in option.items() %}
+{%- if "unattended_upgrade" not in key %}
+{{ key }} = {{ value }}
+{%- endif -%}
+{%- endfor -%}
+{% endfor %}
+{% endfor %}
