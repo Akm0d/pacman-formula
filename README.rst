@@ -19,7 +19,7 @@ Available states
 ---------------------
 Set up unattended updates for the given repository
 
-``pacman.repos``
-----------------
+``pacman.repositories``
+-----------------------
 Maintain specific package repositories
 

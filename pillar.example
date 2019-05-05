@@ -34,9 +34,9 @@ pacman:
     - CleanMethod: KeepInstalled
     - UseDelta: 0.7
     - Architecture: auto
-    - IgnorePkg:
-      - vim
-      - nano
+#   - IgnorePkg:
+#     - vim
+#     - nano
 #   - IgnoreGroup:
 #     - group1
 #     - group2
