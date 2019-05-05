@@ -1,11 +1,11 @@
 pacman:
   repos:
 #   - antergos-staging:
-    - antergos:
-      - Include: /etc/pacman.d/antergos-mirrorlist
-      - SigLevel: PackageRequired
+#   - antergos:
+#     - Include: /etc/pacman.d/antergos-mirrorlist
+#     - SigLevel: PackageRequired
 #     - Server: http://mirrors.antergos.com/$repo/$arch/
-      - unattended_upgrade: True
+#     - unattended_upgrade: TrueFalse
     - community:
       - unattended_upgrade: True
       - Include: /etc/pacman.d/mirrorlist
@@ -15,10 +15,10 @@ pacman:
       - unattended_upgrade: True
     - extra:
       - Include: /etc/pacman.d/mirrorlist
-      - unattended_upgrade: False
+      - unattended_upgrade: True
     - multilib:
       - Include: /etc/pacman.d/mirrorlist
-      - unattended_upgrade: False
+      - unattended_upgrade: True
 #   - multilib-testing:
 #   - testing:
   options:
@@ -29,14 +29,14 @@ pacman:
     - GPGDir: /etc/pacman.d/gnupg/
     - HookDir: /etc/pacman.d/hooks/
     - HoldPkg: pacman glibc
-    - XferCommand: /usr/bin/curl -L -C - -f -o %o %u
-    - XferCommand: /usr/bin/wget --passive-ftp -c -O %o %u
+#   - XferCommand: "/usr/bin/curl -L -C - -f -o %o %u"
+#   - XferCommand: "/usr/bin/wget --passive-ftp -c -O %o %u"
     - CleanMethod: KeepInstalled
     - UseDelta: 0.7
     - Architecture: auto
-#   - IgnorePkg:
-#     - package1
-#     - package2
+    - IgnorePkg:
+      - vim
+      - nano
 #   - IgnoreGroup:
 #     - group1
 #     - group2
@@ -47,9 +47,9 @@ pacman:
 #     - package1
 #     - package2
 #   - UseSyslog
-#   - Color
+    - Color
 #   - TotalDownload
     - CheckSpace
 #   - VerbosePkgLists
     - SigLevel: Required DatabaseOptional
-#   - RemoteFileSigLevel: Required
+    - RemoteFileSigLevel: Required
