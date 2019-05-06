@@ -16,6 +16,8 @@ pacman:
     - extra:
       - Include: /etc/pacman.d/mirrorlist
       - unattended_upgrade: False
+#   - gnome-unstable:
+#   - kde-unstable:
     - multilib:
       - Include: /etc/pacman.d/mirrorlist
       - unattended_upgrade: False
@@ -53,3 +55,4 @@ pacman:
 #   - VerbosePkgLists
     - SigLevel: Required DatabaseOptional
     - RemoteFileSigLevel: Required
+    - LocalFileSigLevel: Optional
